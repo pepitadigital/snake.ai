@@ -376,6 +376,8 @@
 "Assets/Scripts/Core/GridSystem.cs"
 "Assets/Scripts/Core/SceneManager.cs"
 "Assets/Scripts/Core/SnakeController.cs"
+"Assets/Scripts/UI/SceneController.cs"
+"Assets/Scripts/UI/UIManager.cs"
 -langversion:9.0
 /deterministic
 /optimize+

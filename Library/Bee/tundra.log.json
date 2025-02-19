@@ -149,12 +149,10 @@
 {"msg":"enqueueNode","enqueuedNodeAnnotation":"CopyFiles Library/ScriptAssemblies/Assembly-CSharp.pdb","enqueuedNodeIndex":148,"enqueueingNodeAnnotation":"ScriptAssemblies","enqueueingNodeIndex":6}
 {"msg":"nodeRetryBuild","annotation":"Csc Library/Bee/artifacts/200b0aE.dag/Assembly-CSharp.dll (+2 others)","index":139}
 {"msg":"runNodeAction","annotation":"Csc Library/Bee/artifacts/200b0aE.dag/Assembly-CSharp.dll (+2 others)","displayName":"Compiling C# (Assembly-CSharp)","index":139}
-{"msg":"noderesult","processed_node_count":144,"number_of_nodes_ever_queued":148,"annotation":"Csc Library/Bee/artifacts/200b0aE.dag/Assembly-CSharp.dll (+2 others)","index":139,"exitcode":0,"outputfile":"Library/Bee/artifacts/200b0aE.dag/Assembly-CSharp.dll","stdout":"Assets/Scripts/Core/GameManager.cs(22,34): warning CS0414: The field 'GameManager.baseScorePerFood' is assigned but its value is never used\nAssets/Scripts/Core/GameManager.cs(26,19): warning CS0414: The field 'GameManager.currentMultiplier' is assigned but its value is never used"}
-{"msg":"newNode","annotation":"CopyFiles Library/ScriptAssemblies/Assembly-CSharp.dll","index":147}
+{"msg":"noderesult","processed_node_count":144,"number_of_nodes_ever_queued":148,"annotation":"Csc Library/Bee/artifacts/200b0aE.dag/Assembly-CSharp.dll (+2 others)","index":139,"exitcode":0,"outputfile":"Library/Bee/artifacts/200b0aE.dag/Assembly-CSharp.dll","stdout":"Assets/Scripts/Core/GameManager.cs(22,34): warning CS0414: The field 'GameManager.baseScorePerFood' is assigned but its value is never used"}
+{"msg":"inputSignatureChanged","annotation":"CopyFiles Library/ScriptAssemblies/Assembly-CSharp.dll","index":147,"changes":[{"key":"FileList","value":["Library/Bee/artifacts/200b0aE.dag/Assembly-CSharp.dll"],"oldvalue":[],"dependency":"explicit"}]}
 {"msg":"runNodeAction","annotation":"CopyFiles Library/ScriptAssemblies/Assembly-CSharp.dll","displayName":"Copying Assembly-CSharp.dll","index":147}
-{"msg":"newNode","annotation":"CopyFiles Library/ScriptAssemblies/Assembly-CSharp.pdb","index":148}
+{"msg":"inputSignatureChanged","annotation":"CopyFiles Library/ScriptAssemblies/Assembly-CSharp.pdb","index":148,"changes":[{"key":"FileList","value":["Library/Bee/artifacts/200b0aE.dag/Assembly-CSharp.pdb"],"oldvalue":[],"dependency":"explicit"}]}
 {"msg":"runNodeAction","annotation":"CopyFiles Library/ScriptAssemblies/Assembly-CSharp.pdb","displayName":"Copying Assembly-CSharp.pdb","index":148}
 {"msg":"noderesult","processed_node_count":145,"number_of_nodes_ever_queued":148,"annotation":"CopyFiles Library/ScriptAssemblies/Assembly-CSharp.dll","index":147,"exitcode":0,"outputfile":"Library/ScriptAssemblies/Assembly-CSharp.dll"}
 {"msg":"noderesult","processed_node_count":146,"number_of_nodes_ever_queued":148,"annotation":"CopyFiles Library/ScriptAssemblies/Assembly-CSharp.pdb","index":148,"exitcode":0,"outputfile":"Library/ScriptAssemblies/Assembly-CSharp.pdb"}
-{"msg":"newNode","annotation":"ScriptAssemblies","index":6}
-{"msg":"runNodeAction","annotation":"ScriptAssemblies","index":6}

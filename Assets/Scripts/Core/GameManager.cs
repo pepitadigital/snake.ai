@@ -4,8 +4,8 @@ using System.Collections.Generic;
 public enum GameState
 {
     Menu,
+    PowerSelection,
     Playing,
-    Paused,
     GameOver
 }
 
@@ -30,11 +30,17 @@ public class GameManager : MonoBehaviour
     public int CurrentScore => currentScore;
     public float CurrentMultiplier => CalculateTotalMultiplier();
 
+    // Events
+    public event System.Action<GameState> OnGameStateChanged;
+    public event System.Action<int> OnScoreChanged;
+    public event System.Action<float> OnMultiplierChanged;
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -47,49 +53,57 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        UpdateMultipliers();
+        if (currentState == GameState.Playing)
+        {
+            UpdateMultipliers();
+        }
     }
 
     private void InitializeGame()
     {
-        currentState = GameState.Menu;
+        SetGameState(GameState.Menu);
+        ResetGame();
+    }
+
+    private void ResetGame()
+    {
         currentScore = 0;
         currentMultiplier = 1f;
         activeMultipliers.Clear();
+        OnScoreChanged?.Invoke(currentScore);
+        OnMultiplierChanged?.Invoke(currentMultiplier);
+    }
 
-        // Subscribe to events
-        snake.OnCollision += HandleCollision;
-        snake.OnFoodCollected += HandleFoodCollected;
+    public void StartPowerSelection()
+    {
+        ResetGame();
+        SetGameState(GameState.PowerSelection);
     }
 
     public void StartGame()
     {
-        currentState = GameState.Playing;
-        currentScore = 0;
-        currentMultiplier = 1f;
-        activeMultipliers.Clear();
-
+        SetGameState(GameState.Playing);
         snake.Initialize();
         foodManager.SpawnFood();
     }
 
-    public void PauseGame()
+    public void ReturnToMainMenu()
     {
-        if (currentState == GameState.Playing)
-            currentState = GameState.Paused;
+        SetGameState(GameState.Menu);
+        ResetGame();
     }
 
-    public void ResumeGame()
+    private void SetGameState(GameState newState)
     {
-        if (currentState == GameState.Paused)
-            currentState = GameState.Playing;
+        currentState = newState;
+        OnGameStateChanged?.Invoke(currentState);
     }
 
     private void HandleCollision()
     {
         if (currentState != GameState.Playing) return;
         
-        currentState = GameState.GameOver;
+        SetGameState(GameState.GameOver);
         SaveHighScore();
     }
 
@@ -104,17 +118,25 @@ public class GameManager : MonoBehaviour
     public void AddMultiplier(float value, float duration)
     {
         activeMultipliers.Add(new MultiplierEffect(value, duration));
+        OnMultiplierChanged?.Invoke(CalculateTotalMultiplier());
     }
 
     private void UpdateMultipliers()
     {
+        bool multiplierChanged = false;
         for (int i = activeMultipliers.Count - 1; i >= 0; i--)
         {
             activeMultipliers[i].RemainingDuration -= Time.deltaTime;
             if (activeMultipliers[i].RemainingDuration <= 0)
             {
                 activeMultipliers.RemoveAt(i);
+                multiplierChanged = true;
             }
+        }
+
+        if (multiplierChanged)
+        {
+            OnMultiplierChanged?.Invoke(CalculateTotalMultiplier());
         }
     }
 
@@ -131,6 +153,7 @@ public class GameManager : MonoBehaviour
     private void AddScore(int amount)
     {
         currentScore += amount;
+        OnScoreChanged?.Invoke(currentScore);
     }
 
     private void SaveHighScore()
