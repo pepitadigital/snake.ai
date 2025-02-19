@@ -57,9 +57,7 @@ public class GridSystem : MonoBehaviour
 
     public bool IsValidPosition(Vector2Int gridPos)
     {
-        return gridPos.x >= 0 && gridPos.x < gridSize.x &&
-               gridPos.y >= 0 && gridPos.y < gridSize.y &&
-               !occupiedCells[gridPos.x, gridPos.y];
+        return IsWithinBounds(gridPos) && !occupiedCells[gridPos.x, gridPos.y];
     }
 
     public void SetCellOccupied(Vector2Int gridPos, bool occupied)
@@ -75,7 +73,7 @@ public class GridSystem : MonoBehaviour
         return IsWithinBounds(gridPos) && occupiedCells[gridPos.x, gridPos.y];
     }
 
-    private bool IsWithinBounds(Vector2Int gridPos)
+    public bool IsWithinBounds(Vector2Int gridPos)
     {
         return gridPos.x >= 0 && gridPos.x < gridSize.x &&
                gridPos.y >= 0 && gridPos.y < gridSize.y;
